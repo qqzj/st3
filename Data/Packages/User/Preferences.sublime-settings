@@ -1,5 +1,3 @@
-// Settings in here override those in "Default/Preferences.sublime-settings",
-// and are overridden in turn by file type specific settings.
 {
 	"auto_indent": true,
 	"bold_folder_labels": true,
@@ -12,8 +10,8 @@
 	],
 	"folder_exclude_patterns":
 	[
-	".svn",
-	".git"
+		".svn",
+		".git"
 	],
 	"font_face": "Consolas",
 	"font_options":
@@ -24,7 +22,7 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-	"Vintage"
+		"Vintage"
 	],
 	"indent_to_bracket": true,
 	"line_padding_bottom": 1,
