@@ -1,0 +1,14 @@
+ConvertToUTF8
+DocBlockr
+AutoFileName
+All Autocomplete
+Bracket​Highlighter
+CodeIgniter Snippets
+*CodeIgniter Utilies
+*SublimeCodeIntel 
+Git
+GitGutter
+Emmet
+IMESupport
+ColorPicker
+HtmlBeautify
