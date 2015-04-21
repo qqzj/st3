@@ -2,6 +2,6 @@
     //"shell_cmd": "make",
     "cmd": ["php.exe", "$file"],
     "file_regex": "php$",
-    "path":"H:\\WAMP\\php5.4.12x86",
+    "path":"I:\\wampserver\\php5.6.7",
     "selector": "source.php",
 }

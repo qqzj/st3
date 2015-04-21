@@ -17,6 +17,9 @@ FORCE_GROUP = 8
 IGNORECASE = 2
 LITERAL = 1
 MONOSPACE_FONT = 1
+KEEP_OPEN_ON_FOCUS_LOST = 2
+HTML = 1
+COOPERATE_WITH_AUTO_COMPLETE = 2
 
 DRAW_EMPTY = 1
 HIDE_ON_MINIMAP = 2
@@ -48,6 +51,10 @@ CLASS_LINE_END = 128
 CLASS_EMPTY_LINE = 256
 INHIBIT_WORD_COMPLETIONS = 8
 INHIBIT_EXPLICIT_COMPLETIONS = 16
+
+DIALOG_CANCEL = 0
+DIALOG_YES = 1
+DIALOG_NO = 2
 
 def version():
     return sublime_api.version()
@@ -91,12 +98,16 @@ def message_dialog(msg):
 def ok_cancel_dialog(msg, ok_title = ""):
     return sublime_api.ok_cancel_dialog(msg, ok_title)
 
+def yes_no_cancel_dialog(msg, yes_title = "", no_title = ""):
+    return sublime_api.yes_no_cancel_dialog(msg, yes_title, no_title)
+
 def run_command(cmd, args = None):
     sublime_api.run_command(cmd, args)
 
 def get_clipboard(size_limit = 16777216):
     """ Returns the content of the clipboard, for performance reason if the size
-    of the clipboard content is bigger than size_limit, empty string will be returned
+    of the clipboard content is bigger than size_limit, an empty string will be
+    returned
     """
     return sublime_api.get_clipboard(size_limit)
 
@@ -116,6 +127,9 @@ def log_result_regex(flag):
 
 def log_indexing(flag):
     sublime_api.log_indexing(flag)
+
+def log_build_systems(flag):
+    sublime_api.log_build_systems(flag)
 
 def score_selector(scope_name, selector):
     return sublime_api.score_selector(scope_name, selector)
@@ -145,6 +159,9 @@ def decode_value(data):
         raise ValueError(err)
 
     return val
+
+def expand_variables(val, variables):
+    return sublime_api.expand_variables(val, variables)
 
 def load_settings(base_name):
     settings_id = sublime_api.load_settings(base_name)
@@ -335,6 +352,7 @@ class Window(object):
         """
         on_select is called when the the quick panel is finished, and should accept a single integer, specifying which item was selected, or -1 for none
         on_highlight is called when the quick panel is still active, and indicates the current highlighted index
+        flags is a bitwise OR of MONOSPACE_FONT, and KEEP_OPEN_ON_FOCUS_LOST
         """
         items_per_row = 1
         flat_items = items
@@ -351,7 +369,7 @@ class Window(object):
                     for j in range(items_per_row):
                         flat_items.append(items[i][j])
 
-        return sublime_api.window_show_quick_panel(self.window_id, flat_items,
+        sublime_api.window_show_quick_panel(self.window_id, flat_items,
             items_per_row, on_select, on_highlight, flags, selected_index)
 
     def folders(self):
@@ -393,6 +411,9 @@ class Window(object):
     def lookup_symbol_in_open_files(self, sym):
         """ Finds all files and locations where sym in defined, searching through open files """
         return sublime_api.window_lookup_symbol_in_open_files(self.window_id, sym)
+
+    def extract_variables(self):
+        return sublime_api.window_extract_variables(self.window_id)
 
 
 class Edit(object):
@@ -542,6 +563,13 @@ class Sheet(object):
             return None
         else:
             return Window(window_id)
+
+    def view(self):
+        view_id = sublime_api.sheet_view(self.sheet_id)
+        if view_id == 0:
+            return None
+        else:
+            return View(view_id)
 
 class View(object):
     def __init__(self, id):
@@ -826,6 +854,12 @@ class View(object):
         """ Converts a point in layout coordinates to a text coodinate """
         return sublime_api.view_layout_to_text(self.view_id, xy)
 
+    def window_to_layout(self, xy):
+        return sublime_api.view_window_to_layout(self.view_id, xy)
+
+    def window_to_text(self, xy):
+        return self.layout_to_text(self.window_to_layout(xy))
+
     def line_height(self):
         """ Returns the height of a line in layout coordinates """
         return sublime_api.view_line_height(self.view_id)
@@ -915,6 +949,20 @@ class View(object):
         return sublime_api.view_show_popup_table(self.view_id, items,
             on_select, flags, -1)
 
+    def show_popup(self, content, flags = 0, location = -1,
+        max_width = 320, max_height = 240,
+        on_navigate = None, on_hide = None):
+        sublime_api.view_show_popup(self.view_id, location, content,
+            flags, max_width, max_height, on_navigate, on_hide)
+
+    def update_popup(self, content):
+        sublime_api.view_update_popup_content(self.view_id, content)
+
+    def is_popup_visible(self):
+        return sublime_api.view_is_popup_visible(self.view_id)
+
+    def hide_popup(self):
+        sublime_api.view_hide_popup(self.view_id)
 
 class Settings(object):
     def __init__(self, id):

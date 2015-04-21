@@ -1,11 +1,25 @@
 {
-	"installed_dependencies":
+	"in_process_packages":
 	[
-		"0_package_control_loader",
-		"bz2"
 	],
 	"installed_packages":
 	[
-		"Package Control"
+		"All Autocomplete",
+		"AutoFileName",
+		"BracketHighlighter",
+		"CodeIgniter Snippets",
+		"CodeIgniter Utilities",
+		"ColorPicker",
+		"ConvertToUTF8",
+		"DocBlockr",
+		"Emmet",
+		"Git",
+		"GitGutter",
+		"HTMLBeautify",
+		"IMESupport",
+		"Markdown Preview",
+		"Package Control",
+		"SVN",
+		"Thinkphp"
 	]
 }
