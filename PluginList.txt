@@ -12,3 +12,4 @@ Emmet
 IMESupport
 ColorPicker
 HtmlBeautify
+Generic Config
