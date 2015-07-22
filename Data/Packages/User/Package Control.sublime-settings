@@ -13,12 +13,15 @@
 		"ConvertToUTF8",
 		"DocBlockr",
 		"Emmet",
+		"Generic Config",
 		"Git",
 		"GitGutter",
-		"HTMLBeautify",
+		"HTML-CSS-JS Prettify",
 		"IMESupport",
 		"Markdown Preview",
 		"Package Control",
+		"phpfmt",
+		"Sublime Text 3 Snippets",
 		"SVN",
 		"Thinkphp"
 	]
