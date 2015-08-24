@@ -31,8 +31,8 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"GitGutter"
+		"GitGutter",
+		"Vintage"
 	],
 	"indent_to_bracket": true,
 	"index_workers": 4,
@@ -48,5 +48,5 @@
 	"use_tab_stops": true,
 	"word_separators": "./\\()\"'-:,.;<>~!@#%^&*|+=[]{}`~?",
 	"word_wrap": false,
-	"wrap_width": 0
+	"wrap_width": 0,
 }
