@@ -1,4 +1,7 @@
 {
-	"target": "gs9o_build",
-	"selector": "source.go"
+	"path":"D:\\golang\\bin",
+	"file_regex": "",
+    "selector": "source.go",
+    "cmd": ["go.exe", "run", "$file"],
+	"encoding":"UTF-8",
 }
