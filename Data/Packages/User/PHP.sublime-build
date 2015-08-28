@@ -1,7 +1,7 @@
 {
     //"shell_cmd": "make",
     "cmd": ["php.exe", "$file"],
-    "file_regex": ".*\\.php$",
+    "file_regex": "",
     "path":"E:\\wampserver\\php",
     "selector": "source.php",
 }
